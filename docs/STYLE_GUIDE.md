@@ -75,7 +75,8 @@
 
 ### 원칙
 
-4px 배수 그리드를 엄격히 준수한다. 내부 도구는 compact density가 기본이다.
+토큰에 정의된 간격 스케일만 사용한다 (2px 기반: 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48px).
+내부 도구는 compact density가 기본이다.
 
 ### Do
 
@@ -96,7 +97,7 @@
 
 ### Don't
 
-- 비정규 값 금지: `padding: 7px`, `gap: 15px` 등 4px 배수가 아닌 값 금지.
+- 비정규 값 금지: `padding: 7px`, `gap: 15px` 등 토큰 스케일에 없는 임의 값 금지.
 - 과도한 여백 금지: `p-8`(32px) 이상을 카드 패딩으로 사용하지 않는다.
 - 화면 끝에 콘텐츠가 붙는 레이아웃 금지 — 최소 `space-4` 페이지 패딩 유지.
 
@@ -113,14 +114,16 @@
 
 ### Do
 
-- Surface/Text/Border 토큰을 사용하면 자동으로 다크 모드가 적용된다:
+- **CSS 변수 방식**: Surface/Text/Border 토큰을 사용하면 자동으로 다크 모드가 적용된다:
   ```css
   /* CSS */ background: var(--bg); color: var(--text);
   ```
+- **시맨틱 배경** (CSS 변수): `var(--color-success-bg)` 등은 다크 모드에서 자동으로 어두운 톤으로 전환.
+- **Tailwind 방식**: 반드시 `dark:` 변형을 함께 지정하라. Surface/Text는 자동 전환되지 않는다:
   ```html
   <!-- Tailwind --> <div class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50">
   ```
-- 시맨틱 배경 토큰 사용: `var(--color-success-bg)` 등은 다크 모드에서 자동으로 어두운 톤으로 전환.
+  단, 시맨틱 배경(`bg-success-bg` 등)은 `design-tokens.css`를 함께 import하면 CSS 변수를 통해 자동 전환된다.
 
 ### Don't
 
@@ -172,7 +175,7 @@
 ### Don't
 
 - 색상만으로 구분하는 차트/상태 표시 금지.
-- `outline: none`으로 포커스 스타일 제거 금지.
+- `outline: none`으로 포커스 스타일을 **대체 없이** 제거 금지. `outline: none` + `box-shadow` 또는 `border-color` 변경으로 대체하는 것은 허용.
 - 이미지에 `alt` 속성 누락 금지.
 
 > **이유**: 현장 근무자 중 색각 이상 비율이 생각보다 높다. 키보드 접근성은 효율적 운영의 기본이다.
@@ -188,13 +191,18 @@ AI가 생성하는 코드도 유지보수 가능한 품질이어야 한다.
 ### Do
 
 - 컴포넌트 파일은 **300줄 이하**로 유지. 초과 시 분리.
-- CSS 변수 또는 Tailwind 클래스로 스타일링. 인라인 style은 동적 값에만 사용.
+- CSS 변수 또는 Tailwind 클래스로 스타일링. 인라인 style은 아래 경우에만 허용:
+  - **동적 값**: JS에서 계산된 width, height, transform 등
+  - **CSS 변수 참조**: `style="color: var(--text-secondary)"` 같은 토큰 기반 인라인
+  - **단발성 레이아웃**: `<style>` 블록 없이 빠르게 프로토타이핑하는 경우 (단, 반복되면 클래스로 추출)
 - 반복 패턴은 컴포넌트로 추출.
 
 ### Don't
 
 - `!important` 사용 금지 — 토큰 시스템을 우회하면 통일성이 깨진다.
-- 인라인 `style` 속성으로 레이아웃 구성 금지 — CSS/Tailwind 사용.
+- 색상, 폰트 크기, 간격(padding/margin/gap)을 인라인 style에 하드코딩 금지 — 반드시 토큰 변수를 참조.
+  - 예외: Python(Streamlit) 등 CSS 변수를 참조할 수 없는 환경에서는 `HL_TOKENS` 상수에서 가져온 토큰 값 사용 허용.
+  - 그리드 breakpoint(`minmax(180px, 1fr)`), border 두께(`3px`) 등 토큰에 정의되지 않은 레이아웃 수치는 허용.
 - 사용하지 않는 코드 남기기 금지.
 
 > **이유**: 내부 도구는 만든 사람이 아닌 다른 사람이 유지보수하는 경우가 많다. 깔끔한 코드가 인수인계 비용을 줄인다.

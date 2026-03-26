@@ -54,7 +54,7 @@
     background: var(--color-error);
     color: var(--text-inverse);
   }
-  .btn-danger:hover { background: #b91c1c; }
+  .btn-danger:hover { background: var(--color-error); filter: brightness(0.85); }
 </style>
 
 <button class="btn btn-primary btn-md">저장</button>
@@ -89,7 +89,7 @@
 
 {/* Danger */}
 <button className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium
-  bg-error text-white rounded-md hover:bg-red-700 transition-all duration-fast">
+  bg-error text-white rounded-md hover:brightness-90 transition-all duration-fast">
   삭제
 </button>
 ```
@@ -121,7 +121,7 @@
     transition: border-color var(--duration-fast) var(--easing);
   }
   .form-input:hover { border-color: var(--border-hover); }
-  .form-input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(0, 180, 237, 0.15); }
+  .form-input:focus { outline: none; border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(0, 145, 199, 0.15); }
   .form-input::placeholder { color: var(--text-tertiary); }
   .form-input--error { border-color: var(--color-error); }
   .form-error {
@@ -382,7 +382,7 @@ st.markdown("""
 <style>
   .stDataFrame table { font-size: 14px; }
   .stDataFrame th {
-    background: var(--bg-secondary, #f8f9fb) !important;
+    background: var(--bg-secondary, #f8f9fb);
     font-size: 12px;
     text-transform: uppercase;
   }
@@ -477,16 +477,28 @@ function Badge({ variant = "default", children }) {
 
 ### Python (Streamlit)
 
+> **참고**: Streamlit은 CSS 변수를 직접 참조할 수 없으므로, `design-tokens.css`의 토큰 값을
+> 상수 딕셔너리(`HL_TOKENS`)로 옮겨 사용한다. 토큰 값이 변경되면 이 상수도 함께 수정할 것.
+
 ```python
 import streamlit as st
 
+# design-tokens.css에서 추출한 토큰 상수
+HL_TOKENS = {
+    "success": "#16a34a", "success_bg": "#f0fdf4",
+    "warning": "#ca8a04", "warning_bg": "#fefce8",
+    "error":   "#dc2626", "error_bg":   "#fef2f2",
+    "info":    "#0091c7", "info_bg":    "#e8f7fd",
+    "gray600": "#5c6370", "gray100":    "#f1f3f5",
+}
+
 def badge(text, variant="default"):
     colors = {
-        "success": ("#16a34a", "#f0fdf4"),
-        "warning": ("#ca8a04", "#fefce8"),
-        "error":   ("#dc2626", "#fef2f2"),
-        "info":    ("#0091c7", "#e8f7fd"),
-        "default": ("#5c6370", "#f1f3f5"),
+        "success": (HL_TOKENS["success"], HL_TOKENS["success_bg"]),
+        "warning": (HL_TOKENS["warning"], HL_TOKENS["warning_bg"]),
+        "error":   (HL_TOKENS["error"],   HL_TOKENS["error_bg"]),
+        "info":    (HL_TOKENS["info"],     HL_TOKENS["info_bg"]),
+        "default": (HL_TOKENS["gray600"], HL_TOKENS["gray100"]),
     }
     fg, bg = colors.get(variant, colors["default"])
     st.markdown(
@@ -613,21 +625,33 @@ function KpiCard({ label, value, unit, trend, trendDirection, status = "default"
 
 ### Python (Streamlit)
 
+> **참고**: `HL_TOKENS` 딕셔너리는 Badge 섹션에서 정의한 것과 동일.
+> 프로젝트에서 하나의 `hl_tokens.py` 모듈로 관리하는 것을 권장한다.
+
 ```python
 import streamlit as st
 
+# HL_TOKENS는 프로젝트 공통 모듈에서 import (Badge 섹션 참조)
+HL_TOKENS.update({
+    "gray200": "#e2e5e9", "gray900": "#1c2028",
+})
+
 def kpi_card(label, value, unit, trend=None, trend_dir="up", status="default"):
-    border_color = {"success": "#16a34a", "warning": "#ca8a04", "error": "#dc2626"}.get(status, "#e2e5e9")
-    trend_color = "#16a34a" if trend_dir == "up" else "#dc2626"
+    border_color = {
+        "success": HL_TOKENS["success"],
+        "warning": HL_TOKENS["warning"],
+        "error":   HL_TOKENS["error"],
+    }.get(status, HL_TOKENS["gray200"])
+    trend_color = HL_TOKENS["success"] if trend_dir == "up" else HL_TOKENS["error"]
     arrow = "↑" if trend_dir == "up" else "↓"
     trend_html = f'<div style="font-size:12px;color:{trend_color};margin-top:4px;">{arrow} {trend}</div>' if trend else ""
 
     st.markdown(f"""
-    <div style="background:white;border:1px solid #e2e5e9;border-left:3px solid {border_color};
+    <div style="background:white;border:1px solid {HL_TOKENS['gray200']};border-left:3px solid {border_color};
       border-radius:8px;padding:12px 16px;">
-      <div style="font-size:12px;color:#5c6370;margin-bottom:4px;">{label}</div>
-      <div style="font-size:24px;font-weight:700;color:#1c2028;">
-        {value}<span style="font-size:14px;font-weight:400;color:#5c6370;margin-left:4px;">{unit}</span>
+      <div style="font-size:12px;color:{HL_TOKENS['gray600']};margin-bottom:4px;">{label}</div>
+      <div style="font-size:24px;font-weight:700;color:{HL_TOKENS['gray900']};">
+        {value}<span style="font-size:14px;font-weight:400;color:{HL_TOKENS['gray600']};margin-left:4px;">{unit}</span>
       </div>
       {trend_html}
     </div>""", unsafe_allow_html=True)
@@ -700,7 +724,7 @@ with cols[3]: kpi_card("장애 건수", "2", "건", "1건 전일 대비", "up", 
     placeholder="검색어 입력..."
     className="min-w-[160px] px-3 py-2 text-sm bg-white dark:bg-gray-900
       border border-gray-200 dark:border-gray-700 rounded-md
-      placeholder:text-gray-400 focus:outline-none focus:border-primary-500"
+      placeholder:text-gray-400 focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20"
   />
   <select className="px-3 py-2 text-sm bg-white dark:bg-gray-900
     border border-gray-200 dark:border-gray-700 rounded-md cursor-pointer">
@@ -725,6 +749,15 @@ with cols[3]: kpi_card("장애 건수", "2", "건", "1건 전일 대비", "up", 
 ## 8. Modal / Dialog
 
 헤더 + 본문 + 푸터 액션. 중요 확인이나 폼 입력에 사용.
+
+### 접근성 체크리스트
+
+- `role="dialog"` + `aria-modal="true"` 필수
+- `aria-labelledby`로 제목 요소를 연결
+- 열릴 때 첫 번째 포커스 가능 요소로 포커스 이동
+- **ESC 키**로 닫기 처리
+- **포커스 트랩**: Tab 키가 모달 내부에서만 순환
+- 닫힌 후 트리거 버튼으로 포커스 복귀
 
 ### CSS 변수 버전
 
@@ -776,46 +809,142 @@ with cols[3]: kpi_card("장애 건수", "2", "건", "1건 전일 대비", "up", 
   }
 </style>
 
-<div class="modal-backdrop">
-  <div class="modal">
+<!-- backdrop 클릭 시 닫기 -->
+<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal()">
+  <!-- role="dialog" + aria-modal로 스크린리더에 모달임을 알림 -->
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"
+       onclick="event.stopPropagation()">
     <div class="modal-header">
-      장비 삭제 확인
-      <button class="modal-close">&times;</button>
+      <span id="modal-title">장비 삭제 확인</span>
+      <button class="modal-close" aria-label="닫기" onclick="closeModal()">&times;</button>
     </div>
     <div class="modal-body">
       <p>EQ-003 (컨베이어 #02)를 삭제하시겠습니까?</p>
       <p>이 작업은 되돌릴 수 없습니다.</p>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary btn-sm">취소</button>
+      <button class="btn btn-secondary btn-sm" onclick="closeModal()">취소</button>
       <button class="btn btn-danger btn-sm">삭제</button>
     </div>
   </div>
 </div>
+
+<script>
+  let _modalTrigger = null; // 포커스 복귀용
+
+  function openModal(triggerEl) {
+    _modalTrigger = triggerEl || document.activeElement;
+    const backdrop = document.getElementById('modalBackdrop');
+    backdrop.style.display = 'flex';
+    // 열릴 때 첫 번째 포커스 가능 요소로 이동
+    const first = backdrop.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (first) first.focus();
+  }
+
+  function closeModal() {
+    document.getElementById('modalBackdrop').style.display = 'none';
+    // 닫힌 후 트리거로 포커스 복귀
+    if (_modalTrigger) _modalTrigger.focus();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const backdrop = document.getElementById('modalBackdrop');
+    if (backdrop.style.display === 'none') return;
+
+    // ESC 닫기
+    if (e.key === 'Escape') { closeModal(); return; }
+
+    // 포커스 트랩: Tab 키가 모달 내부에서만 순환
+    if (e.key === 'Tab') {
+      const modal = backdrop.querySelector('.modal');
+      const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+</script>
 ```
 
 ### Tailwind 버전
 
 ```jsx
-<div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center backdrop-blur-sm">
-  <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md max-h-[80vh] flex flex-col">
-    {/* Header */}
-    <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200 dark:border-gray-700">
-      <h3 className="text-base font-semibold text-gray-900 dark:text-gray-50">장비 삭제 확인</h3>
-      <button className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 text-lg p-1">&times;</button>
+import { useEffect, useRef } from 'react';
+
+function Modal({ isOpen, onClose, title, children, footer }) {
+  const modalRef = useRef(null);
+  const triggerRef = useRef(null);
+
+  // 열릴 때 트리거 저장 + 첫 포커스 이동
+  useEffect(() => {
+    if (!isOpen) return;
+    triggerRef.current = document.activeElement;
+    const first = modalRef.current?.querySelector('button, [href], input, select, textarea');
+    if (first) first.focus();
+  }, [isOpen]);
+
+  // ESC 닫기 + 포커스 트랩
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e) => {
+      if (e.key === 'Escape') { onClose(); return; }
+      if (e.key === 'Tab') {
+        const focusable = modalRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable?.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [isOpen, onClose]);
+
+  // 닫힌 후 포커스 복귀
+  useEffect(() => {
+    if (!isOpen && triggerRef.current) triggerRef.current.focus();
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center backdrop-blur-sm"
+         onClick={onClose}>
+      <div ref={modalRef}
+           className="bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md max-h-[80vh] flex flex-col"
+           role="dialog" aria-modal="true" aria-labelledby="modal-title"
+           onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-4 border-b border-gray-200 dark:border-gray-700">
+          <h3 id="modal-title" className="text-base font-semibold text-gray-900 dark:text-gray-50">{title}</h3>
+          <button onClick={onClose} aria-label="닫기"
+                  className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 text-lg p-1">&times;</button>
+        </div>
+        {/* Body */}
+        <div className="px-4 py-4 overflow-y-auto text-sm text-gray-600 dark:text-gray-400">
+          {children}
+        </div>
+        {/* Footer */}
+        <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-2">
+          {footer}
+        </div>
+      </div>
     </div>
-    {/* Body */}
-    <div className="px-4 py-4 overflow-y-auto text-sm text-gray-600 dark:text-gray-400">
-      <p>EQ-003 (컨베이어 #02)를 삭제하시겠습니까?</p>
-      <p className="mt-2">이 작업은 되돌릴 수 없습니다.</p>
-    </div>
-    {/* Footer */}
-    <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700 flex justify-end gap-2">
-      <button className="px-3 py-1 text-xs border border-gray-200 dark:border-gray-700 rounded-md">취소</button>
-      <button className="px-3 py-1 text-xs bg-error text-white rounded-md">삭제</button>
-    </div>
-  </div>
-</div>
+  );
+}
+
+{/* 사용 */}
+<Modal isOpen={isOpen} onClose={() => setOpen(false)} title="장비 삭제 확인"
+  footer={<>
+    <button className="px-3 py-1 text-xs border border-gray-200 dark:border-gray-700 rounded-md"
+            onClick={() => setOpen(false)}>취소</button>
+    <button className="px-3 py-1 text-xs bg-error text-white rounded-md">삭제</button>
+  </>}>
+  <p>EQ-003 (컨베이어 #02)를 삭제하시겠습니까?</p>
+  <p className="mt-2">이 작업은 되돌릴 수 없습니다.</p>
+</Modal>
 ```
 
 ---
@@ -1217,6 +1346,15 @@ function EmptyState({ icon = "📭", title, description, action, onAction }) {
 
 오른쪽에서 슬라이드하는 상세 정보 패널. 테이블 행 클릭이나 시각화 요소 선택 시 사용.
 
+### 접근성 체크리스트
+
+- `role="dialog"` + `aria-modal="true"` 필수 (Modal과 동일)
+- `aria-labelledby`로 제목 요소를 연결
+- **ESC 키**로 닫기 처리
+- **포커스 트랩**: Tab 키가 Drawer 내부에서만 순환
+- 닫힌 후 트리거 요소(테이블 행 등)로 포커스 복귀
+- 닫기 버튼에 `aria-label="닫기"` 제공
+
 ### CSS 변수 버전
 
 ```html
@@ -1280,11 +1418,11 @@ function EmptyState({ icon = "📭", title, description, action, onAction }) {
   .drawer-row-value { color: var(--text); font-weight: var(--font-weight-medium); }
 </style>
 
-<div class="drawer-backdrop"></div>
-<div class="drawer">
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawerPanel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
   <div class="drawer-header">
-    <h2 class="drawer-title">장비 상세 — EQ-001</h2>
-    <button class="modal-close">&times;</button>
+    <h2 id="drawer-title" class="drawer-title">장비 상세 — EQ-001</h2>
+    <button class="modal-close" aria-label="닫기" onclick="closeDrawer()">&times;</button>
   </div>
   <div class="drawer-body">
     <div class="drawer-section">
@@ -1315,25 +1453,97 @@ function EmptyState({ icon = "📭", title, description, action, onAction }) {
     </div>
   </div>
 </div>
+
+<script>
+  let _drawerTrigger = null;
+
+  function openDrawer(triggerEl) {
+    _drawerTrigger = triggerEl || document.activeElement;
+    document.getElementById('drawerBackdrop').style.display = 'block';
+    document.getElementById('drawerPanel').classList.remove('drawer--closed');
+    const first = document.getElementById('drawerPanel').querySelector('button, [href], input, select, textarea');
+    if (first) first.focus();
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawerBackdrop').style.display = 'none';
+    document.getElementById('drawerPanel').classList.add('drawer--closed');
+    if (_drawerTrigger) _drawerTrigger.focus();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    const panel = document.getElementById('drawerPanel');
+    if (panel.classList.contains('drawer--closed')) return;
+
+    if (e.key === 'Escape') { closeDrawer(); return; }
+
+    if (e.key === 'Tab') {
+      const focusable = panel.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+</script>
 ```
 
 ### Tailwind 버전
 
 ```jsx
+import { useEffect, useRef } from 'react';
+
 function DetailDrawer({ isOpen, onClose, title, children }) {
+  const drawerRef = useRef(null);
+  const triggerRef = useRef(null);
+
+  // 열릴 때 트리거 저장 + 첫 포커스 이동
+  useEffect(() => {
+    if (!isOpen) return;
+    triggerRef.current = document.activeElement;
+    const first = drawerRef.current?.querySelector('button, [href], input, select, textarea');
+    if (first) first.focus();
+  }, [isOpen]);
+
+  // ESC 닫기 + 포커스 트랩
+  useEffect(() => {
+    if (!isOpen) return;
+    const handler = (e) => {
+      if (e.key === 'Escape') { onClose(); return; }
+      if (e.key === 'Tab') {
+        const focusable = drawerRef.current?.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable?.length) return;
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [isOpen, onClose]);
+
+  // 닫힌 후 포커스 복귀
+  useEffect(() => {
+    if (!isOpen && triggerRef.current) triggerRef.current.focus();
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
     <>
       <div className="fixed inset-0 z-40 bg-black/30" onClick={onClose} />
-      <div className="fixed top-0 right-0 bottom-0 z-[41] w-[400px] max-w-[90vw]
+      <div ref={drawerRef}
+        className="fixed top-0 right-0 bottom-0 z-[41] w-[400px] max-w-[90vw]
         bg-white dark:bg-gray-900 border-l border-gray-200 dark:border-gray-700
-        shadow-xl flex flex-col">
+        shadow-xl flex flex-col"
+        role="dialog" aria-modal="true" aria-labelledby="drawer-title">
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-4
           border-b border-gray-200 dark:border-gray-700 shrink-0">
-          <h2 className="text-base font-semibold text-gray-900 dark:text-gray-50">{title}</h2>
-          <button onClick={onClose}
+          <h2 id="drawer-title" className="text-base font-semibold text-gray-900 dark:text-gray-50">{title}</h2>
+          <button onClick={onClose} aria-label="닫기"
             className="text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 text-lg p-1">
             &times;
           </button>

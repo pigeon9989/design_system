@@ -13,23 +13,25 @@
 /* === Fonts === */
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap');
-@import url('https://unpkg.com/lucide-static@latest/font/lucide.css');
+@import url('https://unpkg.com/lucide-static@0.473.0/font/lucide.css');
 
 
 /* ==========================================================================
    1. DESIGN TOKENS
    ========================================================================== */
 :root {
-  /* --- Primary (HL Sky Blue → HL Navy) --- */
-  --hl-primary-50:  #eef8fc;
-  --hl-primary-100: #d5eef9;
-  --hl-primary-200: #a8ddf3;
-  --hl-primary-300: #6bc5ea;
-  --hl-primary-400: #30ade0;
+  /* --- Primary (HL Sky Blue → HL Navy) ---
+   *   ⚠ design-tokens.css와 동기화됨. 값 변경 시 양쪽 모두 수정할 것.
+   */
+  --hl-primary-50:  #e8f7fd;
+  --hl-primary-100: #c5ecfb;
+  --hl-primary-200: #93ddf8;
+  --hl-primary-300: #56c9f3;
+  --hl-primary-400: #1fb8ed;
   --hl-primary-500: #00B4ED;
-  --hl-primary-600: #0095c8;
-  --hl-primary-700: #00729a;
-  --hl-primary-800: #005474;
+  --hl-primary-600: #0091c7;
+  --hl-primary-700: #006d96;
+  --hl-primary-800: #054d6e;
   --hl-primary-900: #002B68;
 
   /* --- Neutral (레이어 구분 강화) --- */
@@ -51,15 +53,17 @@
   --hl-gold:       #C09A5D;
   --hl-silver:     #B2B2B2;
 
-  /* --- Semantic --- */
-  --hl-success:     #18864b;
-  --hl-success-light:#e8f5ee;
-  --hl-warning:     #b88b17;
-  --hl-warning-light:#fdf6e3;
-  --hl-error:       #c9302c;
-  --hl-error-light: #fce8e8;
-  --hl-info:        #0095c8;
-  --hl-info-light:  #eef8fc;
+  /* --- Semantic ---
+   *   ⚠ design-tokens.css와 동기화됨. 값 변경 시 양쪽 모두 수정할 것.
+   */
+  --hl-success:     #16a34a;
+  --hl-success-light:#f0fdf4;
+  --hl-warning:     #ca8a04;
+  --hl-warning-light:#fefce8;
+  --hl-error:       #dc2626;
+  --hl-error-light: #fef2f2;
+  --hl-info:        #0091c7;
+  --hl-info-light:  #e8f7fd;
 
   /* --- Surface & Background (Light) ---
    *
@@ -181,10 +185,10 @@
     --hl-text-disabled:  #3d4550;
     --hl-text-inverse:   #111827;
     --hl-text-link:      var(--hl-primary-300);
-    --hl-success-light:  #0f2a1b;
-    --hl-warning-light:  #2a2410;
-    --hl-error-light:    #2a1010;
-    --hl-info-light:     #0c2030;
+    --hl-success-light:  #052e16;
+    --hl-warning-light:  #1c1a05;
+    --hl-error-light:    #2d0808;
+    --hl-info-light:     #051d2e;
     --hl-shadow-1: 0 1px 3px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03);
     --hl-shadow-2: 0 3px 12px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03);
     --hl-shadow-3: 0 8px 24px rgba(0,0,0,.45);
@@ -206,10 +210,10 @@
   --hl-text-disabled:  #3d4550;
   --hl-text-inverse:   #111827;
   --hl-text-link:      var(--hl-primary-300);
-  --hl-success-light:  #0f2a1b;
-  --hl-warning-light:  #2a2410;
-  --hl-error-light:    #2a1010;
-  --hl-info-light:     #0c2030;
+  --hl-success-light:  #052e16;
+  --hl-warning-light:  #1c1a05;
+  --hl-error-light:    #2d0808;
+  --hl-info-light:     #051d2e;
   --hl-shadow-1: 0 1px 3px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03);
   --hl-shadow-2: 0 3px 12px rgba(0,0,0,.4), 0 0 0 1px rgba(255,255,255,.03);
   --hl-shadow-3: 0 8px 24px rgba(0,0,0,.45);
@@ -376,7 +380,7 @@ code,pre { font-family: var(--hl-mono); }
   box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 1px 3px rgba(180,0,0,.15);
 }
 .hl-btn--danger:hover {
-  background: #a82727;
+  background: #b91c1c;
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0,0,0,.1), 0 4px 12px rgba(180,0,0,.2);
 }
@@ -394,7 +398,7 @@ code,pre { font-family: var(--hl-mono); }
               box-shadow var(--hl-dur) var(--hl-ease);
 }
 .hl-input:hover { border-color: var(--hl-border-strong); box-shadow: 0 0 0 1px var(--hl-border-strong); }
-.hl-input:focus { outline: none; border-color: var(--hl-border-focus); box-shadow: 0 0 0 3px rgba(0,149,200,.15); }
+.hl-input:focus { outline: none; border-color: var(--hl-border-focus); box-shadow: 0 0 0 3px rgba(0,145,199,.15); }
 .hl-input::placeholder { color: var(--hl-text-muted); }
 .hl-input--error { border-color: var(--hl-error); }
 
@@ -519,7 +523,7 @@ select.hl-input { cursor: pointer; padding-right: var(--hl-sp-8); }
 .hl-table tr { height: 40px; }
 .hl-table tbody tr { transition: background var(--hl-dur) var(--hl-ease); }
 .hl-table tbody tr:hover { background: var(--hl-primary-50); }
-[data-theme="dark"] .hl-table tbody tr:hover { background: rgba(0,149,200,.06); }
+[data-theme="dark"] .hl-table tbody tr:hover { background: rgba(0,145,199,.06); }
 
 .hl-table .mono { font-family: var(--hl-mono); font-size: var(--hl-text-xs); }
 .hl-table .bold { font-weight: 600; }
@@ -860,7 +864,7 @@ select.hl-input { cursor: pointer; padding-right: var(--hl-sp-8); }
   transition: border-color var(--hl-dur) var(--hl-ease);
 }
 .hl-textarea:hover { border-color: var(--hl-border-strong); }
-.hl-textarea:focus { outline: none; border-color: var(--hl-border-focus); box-shadow: 0 0 0 3px rgba(0,149,200,.12); }
+.hl-textarea:focus { outline: none; border-color: var(--hl-border-focus); box-shadow: 0 0 0 3px rgba(0,145,199,.12); }
 .hl-textarea::placeholder { color: var(--hl-text-muted); }
 
 /* ==========================================================================

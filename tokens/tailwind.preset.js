@@ -49,10 +49,12 @@ module.exports = {
           silver:        '#B2B2B2',
           'silver-light':'#d9d9d9',
         },
-        success:    { DEFAULT: '#16a34a', bg: '#f0fdf4' },
-        warning:    { DEFAULT: '#ca8a04', bg: '#fefce8' },
-        error:      { DEFAULT: '#dc2626', bg: '#fef2f2' },
-        info:       { DEFAULT: '#0091c7', bg: '#e8f7fd' },
+        /* 시맨틱 배경(bg)은 CSS 변수 참조 → design-tokens.css와 함께 쓰면 다크모드 자동 전환.
+           design-tokens.css 없이 쓸 경우 fallback 값(라이트 모드)이 적용됨. */
+        success:    { DEFAULT: '#16a34a', bg: 'var(--color-success-bg, #f0fdf4)' },
+        warning:    { DEFAULT: '#ca8a04', bg: 'var(--color-warning-bg, #fefce8)' },
+        error:      { DEFAULT: '#dc2626', bg: 'var(--color-error-bg, #fef2f2)' },
+        info:       { DEFAULT: '#0091c7', bg: 'var(--color-info-bg, #e8f7fd)' },
       },
 
       /* --- Typography --- */

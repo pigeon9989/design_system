@@ -310,9 +310,9 @@ function KpiCard({ label, value, unit, trend, trendDir, status }) {
 
 function Badge({ variant, children }) {
   const styles = {
-    success: "bg-green-50 dark:bg-green-900/20 text-green-600",
-    warning: "bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600",
-    error:   "bg-red-50 dark:bg-red-900/20 text-red-600",
+    success: "bg-success-bg text-success",
+    warning: "bg-warning-bg text-warning",
+    error:   "bg-error-bg text-error",
   };
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-full ${styles[variant]}`}>
@@ -844,7 +844,7 @@ export default function EventAnalysis() {
         <div style="font-size:var(--text-2xl); margin-bottom:var(--space-2);">📹</div>
         CAM-01 · 1층 생산동 입구
         <div style="position:absolute;top:var(--space-2);left:var(--space-2);">
-          <span class="badge badge-success" style="font-size:10px;">● LIVE</span>
+          <span class="badge badge-success" style="font-size:var(--text-xs);">● LIVE</span>
         </div>
       </div>
       <div style="background:var(--color-gray-900); border-radius:var(--radius-md);
@@ -853,7 +853,7 @@ export default function EventAnalysis() {
         <div style="font-size:var(--text-2xl); margin-bottom:var(--space-2);">📹</div>
         CAM-02 · 1층 생산라인 A
         <div style="position:absolute;top:var(--space-2);left:var(--space-2);">
-          <span class="badge badge-success" style="font-size:10px;">● LIVE</span>
+          <span class="badge badge-success" style="font-size:var(--text-xs);">● LIVE</span>
         </div>
       </div>
       <div style="background:var(--color-gray-900); border-radius:var(--radius-md);
@@ -862,7 +862,7 @@ export default function EventAnalysis() {
         <div style="font-size:var(--text-2xl); margin-bottom:var(--space-2);">📹</div>
         CAM-03 · 2층 조립동
         <div style="position:absolute;top:var(--space-2);left:var(--space-2);">
-          <span class="badge badge-warning" style="font-size:10px;">● 이벤트</span>
+          <span class="badge badge-warning" style="font-size:var(--text-xs);">● 이벤트</span>
         </div>
       </div>
       <div style="background:var(--color-gray-800); border-radius:var(--radius-md);
@@ -871,7 +871,7 @@ export default function EventAnalysis() {
         <div style="font-size:var(--text-2xl); margin-bottom:var(--space-2);">📹</div>
         CAM-04 · 외부 주차장
         <div style="position:absolute;top:var(--space-2);left:var(--space-2);">
-          <span class="badge badge-error" style="font-size:10px;">● 오프라인</span>
+          <span class="badge badge-error" style="font-size:var(--text-xs);">● 오프라인</span>
         </div>
       </div>
     </div>
