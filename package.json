@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "clean:build": "node scripts/prepare-build.mjs",
+    "prebuild": "npm run clean:build",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build"
   },
   "dependencies": {
     "react": "^18.3.1",

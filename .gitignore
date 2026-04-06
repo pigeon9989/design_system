@@ -3,3 +3,6 @@ build/
 dist/
 .vite/
 .DS_Store
+.vscode/
+*.log
+current-page.png

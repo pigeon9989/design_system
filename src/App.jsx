@@ -1,42 +1,62 @@
-﻿import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout';
-import Home from './pages/Home';
-import Foundations from './pages/Foundations';
-import Motion from './pages/Motion';
-import ComponentsIndex from './pages/ComponentsIndex';
-import Dashboard from './pages/Dashboard';
-import Monitoring from './pages/Monitoring';
-import Cctv from './pages/Cctv';
-import DataViz from './pages/DataViz';
-import LayoutGuide from './pages/LayoutGuide';
 
-// Component detail pages
-import ButtonPage from './pages/components/ButtonPage';
-import BadgePage from './pages/components/BadgePage';
-import InputPage from './pages/components/InputPage';
-import CardPage from './pages/components/CardPage';
-import KpiPage from './pages/components/KpiPage';
-import FilterBarPage from './pages/components/FilterBarPage';
-import TablePage from './pages/components/TablePage';
-import ToastPage from './pages/components/ToastPage';
-import EmptyStatePage from './pages/components/EmptyStatePage';
-import ModalPage from './pages/components/ModalPage';
-import CheckboxRadioPage from './pages/components/CheckboxRadioPage';
-import TogglePage from './pages/components/TogglePage';
-import TextareaPage from './pages/components/TextareaPage';
-import TooltipPage from './pages/components/TooltipPage';
-import TabsPage from './pages/components/TabsPage';
-import PaginationPage from './pages/components/PaginationPage';
-import ProgressPage from './pages/components/ProgressPage';
-import BreadcrumbPage from './pages/components/BreadcrumbPage';
-import AvatarPage from './pages/components/AvatarPage';
-import DropdownPage from './pages/components/DropdownPage';
-import SkeletonPage from './pages/components/SkeletonPage';
+const Home = lazy(() => import('./pages/Home'));
+const Foundations = lazy(() => import('./pages/Foundations'));
+const Motion = lazy(() => import('./pages/Motion'));
+const ComponentsIndex = lazy(() => import('./pages/ComponentsIndex'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Monitoring = lazy(() => import('./pages/Monitoring'));
+const Cctv = lazy(() => import('./pages/Cctv'));
+const DataViz = lazy(() => import('./pages/DataViz'));
+const LayoutGuide = lazy(() => import('./pages/LayoutGuide'));
+
+const ButtonPage = lazy(() => import('./pages/components/ButtonPage'));
+const BadgePage = lazy(() => import('./pages/components/BadgePage'));
+const InputPage = lazy(() => import('./pages/components/InputPage'));
+const CardPage = lazy(() => import('./pages/components/CardPage'));
+const KpiPage = lazy(() => import('./pages/components/KpiPage'));
+const FilterBarPage = lazy(() => import('./pages/components/FilterBarPage'));
+const TablePage = lazy(() => import('./pages/components/TablePage'));
+const ToastPage = lazy(() => import('./pages/components/ToastPage'));
+const EmptyStatePage = lazy(() => import('./pages/components/EmptyStatePage'));
+const ModalPage = lazy(() => import('./pages/components/ModalPage'));
+const CheckboxRadioPage = lazy(() => import('./pages/components/CheckboxRadioPage'));
+const TogglePage = lazy(() => import('./pages/components/TogglePage'));
+const TextareaPage = lazy(() => import('./pages/components/TextareaPage'));
+const TooltipPage = lazy(() => import('./pages/components/TooltipPage'));
+const TabsPage = lazy(() => import('./pages/components/TabsPage'));
+const PaginationPage = lazy(() => import('./pages/components/PaginationPage'));
+const ProgressPage = lazy(() => import('./pages/components/ProgressPage'));
+const BreadcrumbPage = lazy(() => import('./pages/components/BreadcrumbPage'));
+const AvatarPage = lazy(() => import('./pages/components/AvatarPage'));
+const DropdownPage = lazy(() => import('./pages/components/DropdownPage'));
+const SkeletonPage = lazy(() => import('./pages/components/SkeletonPage'));
 
 function LegacyDevBaseRedirect() {
   const location = useLocation();
   const nextPath = location.pathname.replace(/^\/design_system/, '') || '/';
   return <Navigate to={`${nextPath}${location.search}${location.hash}`} replace />;
+}
+
+function RouteFallback() {
+  return (
+    <div className="hl-section">
+      <div className="hl-panel hl-flex hl-items-center hl-justify-between">
+        <span className="hl-text-secondary">Loading page...</span>
+        <span className="hl-badge hl-badge--info">Lazy route</span>
+      </div>
+    </div>
+  );
+}
+
+function renderLazy(Component) {
+  return (
+    <Suspense fallback={<RouteFallback />}>
+      <Component />
+    </Suspense>
+  );
 }
 
 export default function App() {
@@ -46,36 +66,36 @@ export default function App() {
     <Routes>
       {useLegacyDevRedirect && <Route path="design_system/*" element={<LegacyDevBaseRedirect />} />}
       <Route element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="foundations" element={<Foundations />} />
-        <Route path="motion" element={<Motion />} />
-        <Route path="components" element={<ComponentsIndex />} />
-        <Route path="components/button" element={<ButtonPage />} />
-        <Route path="components/badge" element={<BadgePage />} />
-        <Route path="components/input" element={<InputPage />} />
-        <Route path="components/card" element={<CardPage />} />
-        <Route path="components/kpi" element={<KpiPage />} />
-        <Route path="components/filter-bar" element={<FilterBarPage />} />
-        <Route path="components/table" element={<TablePage />} />
-        <Route path="components/toast" element={<ToastPage />} />
-        <Route path="components/empty-state" element={<EmptyStatePage />} />
-        <Route path="components/modal" element={<ModalPage />} />
-        <Route path="components/checkbox-radio" element={<CheckboxRadioPage />} />
-        <Route path="components/toggle" element={<TogglePage />} />
-        <Route path="components/textarea" element={<TextareaPage />} />
-        <Route path="components/tooltip" element={<TooltipPage />} />
-        <Route path="components/tabs" element={<TabsPage />} />
-        <Route path="components/pagination" element={<PaginationPage />} />
-        <Route path="components/progress" element={<ProgressPage />} />
-        <Route path="components/breadcrumb" element={<BreadcrumbPage />} />
-        <Route path="components/avatar" element={<AvatarPage />} />
-        <Route path="components/dropdown" element={<DropdownPage />} />
-        <Route path="components/skeleton" element={<SkeletonPage />} />
-        <Route path="guide/layout" element={<LayoutGuide />} />
-        <Route path="guide/data-visualization" element={<DataViz />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="monitoring" element={<Monitoring />} />
-        <Route path="cctv" element={<Cctv />} />
+        <Route index element={renderLazy(Home)} />
+        <Route path="foundations" element={renderLazy(Foundations)} />
+        <Route path="motion" element={renderLazy(Motion)} />
+        <Route path="components" element={renderLazy(ComponentsIndex)} />
+        <Route path="components/button" element={renderLazy(ButtonPage)} />
+        <Route path="components/badge" element={renderLazy(BadgePage)} />
+        <Route path="components/input" element={renderLazy(InputPage)} />
+        <Route path="components/card" element={renderLazy(CardPage)} />
+        <Route path="components/kpi" element={renderLazy(KpiPage)} />
+        <Route path="components/filter-bar" element={renderLazy(FilterBarPage)} />
+        <Route path="components/table" element={renderLazy(TablePage)} />
+        <Route path="components/toast" element={renderLazy(ToastPage)} />
+        <Route path="components/empty-state" element={renderLazy(EmptyStatePage)} />
+        <Route path="components/modal" element={renderLazy(ModalPage)} />
+        <Route path="components/checkbox-radio" element={renderLazy(CheckboxRadioPage)} />
+        <Route path="components/toggle" element={renderLazy(TogglePage)} />
+        <Route path="components/textarea" element={renderLazy(TextareaPage)} />
+        <Route path="components/tooltip" element={renderLazy(TooltipPage)} />
+        <Route path="components/tabs" element={renderLazy(TabsPage)} />
+        <Route path="components/pagination" element={renderLazy(PaginationPage)} />
+        <Route path="components/progress" element={renderLazy(ProgressPage)} />
+        <Route path="components/breadcrumb" element={renderLazy(BreadcrumbPage)} />
+        <Route path="components/avatar" element={renderLazy(AvatarPage)} />
+        <Route path="components/dropdown" element={renderLazy(DropdownPage)} />
+        <Route path="components/skeleton" element={renderLazy(SkeletonPage)} />
+        <Route path="guide/layout" element={renderLazy(LayoutGuide)} />
+        <Route path="guide/data-visualization" element={renderLazy(DataViz)} />
+        <Route path="dashboard" element={renderLazy(Dashboard)} />
+        <Route path="monitoring" element={renderLazy(Monitoring)} />
+        <Route path="cctv" element={renderLazy(Cctv)} />
       </Route>
     </Routes>
   );
