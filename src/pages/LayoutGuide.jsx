@@ -92,7 +92,7 @@ export default function LayoutGuide() {
             <tr><td className="doc-token-name">.hl-header</td><td>상단 바</td><td className="doc-token-val">height: 48px; sticky; surface bg; border-bottom</td></tr>
             <tr><td className="doc-token-name">.hl-body</td><td>콘텐츠 영역</td><td className="doc-token-val">flex: 1; padding: sp-5 sp-6; bg</td></tr>
             <tr><td className="doc-token-name">.hl-body--flush</td><td>패딩 없는 바디</td><td className="doc-token-val">padding: 0 (전체 폭 콘텐츠)</td></tr>
-            <tr><td className="doc-token-name">.hl-container</td><td>콘텐츠 최대폭 제한</td><td className="doc-token-val">max-width: 1280px</td></tr>
+            <tr><td className="doc-token-name">.hl-container</td><td>콘텐츠 최대폭 제한</td><td className="doc-token-val">max-width: 1280px, 본문 영역 내 좌측 정렬</td></tr>
           </tbody>
         </table>
       </div>

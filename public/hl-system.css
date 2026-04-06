@@ -1,13 +1,13 @@
 ﻿/* ==========================================================================
    HL Design System v1.0
    ==========================================================================
-   ?щ궡 ?댁쁺 ?꾧뎄 UI ?듭씪???꾪븳 ?⑦궎吏뺣맂 CSS 而댄룷?뚰듃 ?쇱씠釉뚮윭由?
-   ???뚯씪 ?섎굹留?import?섎㈃ ?꾩껜 ?붿옄???쒖뒪?쒖씠 ?곸슜??
+   ??沅???곸겫 ?袁㏓럡 UI ???뵬???袁る립 ???텕筌욌베留?CSS ?뚮똾猷??곕뱜 ??깆뵠?됰슢??뵳?
+   ?????뵬 ??롪돌筌?import??롢늺 ?袁⑷퍥 ?遺우쁽????뽯뮞??뽰뵠 ?怨몄뒠??
 
-   ?ъ슜踰?
+   ???쒑린?
      <link rel="stylesheet" href="hl-system.css" />
 
-   李멸퀬: Carbon Design System, Material Design 3, Fluent Design System
+   筌〓㈇?? Carbon Design System, Material Design 3, Fluent Design System
    ========================================================================== */
 
 /* === Fonts === */
@@ -19,7 +19,7 @@
    ========================================================================== */
 :root {
   /* --- Primary (HL Sky Blue ??HL Navy) ---
-   *   ??design-tokens.css? ?숆린?붾맖. 媛?蹂寃????묒そ 紐⑤몢 ?섏젙??寃?
+   *   ??design-tokens.css?? ??녿┛?遺얜쭡. 揶?癰궰野????臾믡걹 筌뤴뫀紐???륁젟??野?
    */
   --hl-primary-50:  #e8f7fd;
   --hl-primary-100: #c5ecfb;
@@ -32,7 +32,7 @@
   --hl-primary-800: #054d6e;
   --hl-primary-900: #002B68;
 
-  /* --- Neutral (?덉씠??援щ텇 媛뺥솕) --- */
+  /* --- Neutral (??됱뵠???닌됲뀋 揶쏅벤?? --- */
   --hl-gray-0:   #ffffff;
   --hl-gray-50:  #f5f6f8;
   --hl-gray-100: #eaecf0;
@@ -52,7 +52,7 @@
   --hl-silver:     #B2B2B2;
 
   /* --- Semantic ---
-   *   ??design-tokens.css? ?숆린?붾맖. 媛?蹂寃????묒そ 紐⑤몢 ?섏젙??寃?
+   *   ??design-tokens.css?? ??녿┛?遺얜쭡. 揶?癰궰野????臾믡걹 筌뤴뫀紐???륁젟??野?
    */
   --hl-success:     #16a34a;
   --hl-success-light:#f0fdf4;
@@ -65,16 +65,14 @@
 
   /* --- Surface & Background (Light) ---
    *
-   *  Depth 怨꾩링??(諛앹???:
+   *  Depth ?④쑴留??(獄쏆빘???:
    *
-   *    L=100  surface         #ffffff    移대뱶 蹂몄껜
-   *    L=96   surface-raised  #f0f1f4    移대뱶 ??援щ텇 (?뚯씠釉??ㅻ뜑, hover)
-   *    L=89   surface-sunken  #dce0e6    移대뱶 ??????곸뿭 (?곕え ?꾨━酉? 肄붾뱶釉붾줉, well)
-   *    L=93   bg              #eaebef    ?섏씠吏 諛곌꼍
-   *    L=82   border          #cfd3da    ?쇰컲 援щ텇??
-   *    L=72   border-strong   #adb3bf    媛뺤“ 援щ텇??
+   *    L=100  surface         #ffffff    燁삳?諭?癰귣챷猿?   *    L=96   surface-raised  #f0f1f4    燁삳?諭????닌됲뀋 (???뵠????삳쐭, hover)
+   *    L=89   surface-sunken  #dce0e6    燁삳?諭????????怨몃열 (?怨뺛걟 ?袁ⓥ봺?? ?꾨뗀諭띌뇡遺얠쨯, well)
+   *    L=93   bg              #eaebef    ??륁뵠筌왖 獄쏄퀗瑗?   *    L=82   border          #cfd3da    ??곗뺘 ?닌됲뀋??
+   *    L=72   border-strong   #adb3bf    揶쏅벡???닌됲뀋??
    *
-   *  surface-sunken? surface ?대??먯꽌留??곗엫 ??bg? 鍮꾩듂??紐낅룄吏留???븷???ㅻ쫫
+   *  surface-sunken?? surface ????癒?퐣筌??怨쀬뿫 ??bg?? ??쑴???筌뤿굝猷꾬쭪?筌???釉????살カ
    */
   --hl-surface:        #ffffff;
   --hl-surface-raised: #f0f1f4;
@@ -86,10 +84,9 @@
   --hl-overlay:        rgba(0,0,0,0.45);
 
   /* --- Text (Light) ---
-   *    L=10   text            #111827    蹂몃Ц
-   *    L=35   text-secondary  #4b5563    ?쇰꺼, ?ㅻ챸
-   *    L=57   text-muted      #838c9a    ?뚰듃, ??꾩뒪?ы봽
-   *    L=72   text-disabled   #adb3bf    鍮꾪솢??
+   *    L=10   text            #111827    癰귣챶揆
+   *    L=35   text-secondary  #4b5563    ??곌볼, ??살구
+   *    L=57   text-muted      #838c9a    ??곕뱜, ???袁⑸뮞??遊?   *    L=72   text-disabled   #adb3bf    ??쑵???
    */
   --hl-text:           #111827;
   --hl-text-secondary: #4b5563;
@@ -99,8 +96,10 @@
   --hl-text-link:      var(--hl-primary-700);
 
   /* --- Typography --- */
-  --hl-font:  'Roboto', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --hl-mono:  'Roboto Mono', ui-monospace, monospace;
+  --hl-font-ko: 'Noto Sans KR', 'Roboto', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --hl-font-en: 'Roboto', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --hl-font: var(--hl-font-ko);
+  --hl-mono: 'Roboto Mono', ui-monospace, monospace;
 
   --hl-text-xs:   0.6875rem;  /* 11px */
   --hl-text-sm:   0.8125rem;  /* 13px */
@@ -116,14 +115,14 @@
   --hl-sp-4: 16px; --hl-sp-5: 20px; --hl-sp-6: 24px;
   --hl-sp-8: 32px; --hl-sp-10: 40px; --hl-sp-12: 48px;
 
-  /* --- Radius (Fluent-inspired, 遺?쒕윭??紐⑥꽌由? --- */
+  /* --- Radius (Fluent-inspired, ?봔??뺤쑎??筌뤴뫁苑뚨뵳? --- */
   --hl-radius-sm: 6px;
   --hl-radius:    10px;
   --hl-radius-lg: 14px;
   --hl-radius-xl: 20px;
   --hl-radius-full: 9999px;
 
-  /* --- Elevation (Atlassian-inspired, ?덉씠?대뱶 洹몃┝?? --- */
+  /* --- Elevation (Atlassian-inspired, ??됱뵠??諭?域밸챶??? --- */
   --hl-shadow-1: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.1);
   --hl-shadow-2: 0 2px 4px rgba(0,0,0,.06), 0 4px 12px rgba(0,0,0,.08);
   --hl-shadow-3: 0 4px 8px rgba(0,0,0,.06), 0 12px 32px rgba(0,0,0,.1);
@@ -148,25 +147,24 @@
 /* ==========================================================================
    2. DARK MODE
    ==========================================================================
-   ?꾨왂: data-theme ?띿꽦?쇰줈 ?쒖뼱. ?놁쑝硫??쒖뒪???ㅼ젙 ?곕쫫.
-     <html data-theme="dark">  ??媛뺤젣 ?ㅽ겕
-     <html data-theme="light"> ??媛뺤젣 ?쇱씠??
-     <html>                    ???쒖뒪???ㅼ젙 ?곕쫫
+   ?袁⑥셽: data-theme ??욧쉐??곗쨮 ??뽯선. ??곸몵筌???뽯뮞????쇱젟 ?怨뺤カ.
+     <html data-theme="dark">  ??揶쏅벡????쎄쾿
+     <html data-theme="light"> ??揶쏅벡????깆뵠??
+     <html>                    ????뽯뮞????쇱젟 ?怨뺤カ
    ========================================================================== */
 @media (prefers-color-scheme: dark) {
   /* --- Dark Mode Depth ---
    *
-   *    L=7    bg              #0d1117    ?섏씠吏 諛곌꼍
-   *    L=12   surface         #161b22    移대뱶, ?⑤꼸
-   *    L=17   surface-raised  #1e2530    ?뚯씠釉??ㅻ뜑, hover
-   *    L=9    surface-sunken  #0f1318    移대뱶 ??????곸뿭
-   *    L=24   border          #30363d    ?쇰컲 援щ텇??
-   *    L=32   border-strong   #484f58    媛뺤“ 援щ텇??
+   *    L=7    bg              #0d1117    ??륁뵠筌왖 獄쏄퀗瑗?   *    L=12   surface         #161b22    燁삳?諭? ??ㅺ섯
+   *    L=17   surface-raised  #1e2530    ???뵠????삳쐭, hover
+   *    L=9    surface-sunken  #0f1318    燁삳?諭????????怨몃열
+   *    L=24   border          #30363d    ??곗뺘 ?닌됲뀋??
+   *    L=32   border-strong   #484f58    揶쏅벡???닌됲뀋??
    *
-   *    L=91   text            #e6edf3    蹂몃Ц
-   *    L=64   text-secondary  #8b949e    ?쇰꺼
-   *    L=43   text-muted      #5a6370    ?뚰듃
-   *    L=30   text-disabled   #3d4550    鍮꾪솢??
+   *    L=91   text            #e6edf3    癰귣챶揆
+   *    L=64   text-secondary  #8b949e    ??곌볼
+   *    L=43   text-muted      #5a6370    ??곕뱜
+   *    L=30   text-disabled   #3d4550    ??쑵???
    */
   :root:not([data-theme="light"]) {
     --hl-bg:             #0d1117;
@@ -222,6 +220,26 @@
    3. BASE RESET
    ========================================================================== */
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html[lang='ko'] {
+  --hl-font: var(--hl-font-ko);
+}
+
+html[lang='en'] {
+  --hl-font: var(--hl-font-en);
+}
+
+body, input, button, select, textarea {
+  font-optical-sizing: auto;
+}
+
+html[lang='en'] body,
+html[lang='en'] input,
+html[lang='en'] button,
+html[lang='en'] select,
+html[lang='en'] textarea {
+  font-variation-settings: 'wdth' 100;
+}
 
 body {
   font-family: var(--hl-font);
@@ -447,7 +465,8 @@ code,pre { font-family: var(--hl-mono); }
 }
 .hl-body--flush { padding: 0; }
 
-.hl-container { max-width: var(--hl-max-w); }
+/* ?볦? 酉고룷?몄뿉??肄섑뀗痢좊뒗 醫뚯륫 ?뺣젹(?ъ씠?쒕컮쨌?ㅻ뜑 ??댄?怨???以꾨줈 ?쏀엳?꾨줉) */
+.hl-container { width: 100%; max-width: var(--hl-max-w); margin-left: 0; margin-right: auto; }
 .hl-stack { display: flex; flex-direction: column; gap: var(--hl-sp-4); }
 
 /* ==========================================================================
@@ -1119,8 +1138,8 @@ select.hl-input { cursor: pointer; padding-right: var(--hl-sp-8); }
   border-radius: var(--hl-radius); box-shadow: var(--hl-shadow-3);
   z-index: 50;
 }
-/* ?곕え?? static 諛곗튂 */
-/* ?곕え?? absolute ?댁젣, 踰꾪듉 ?꾨옒 ?몃줈 諛곗튂 */
+/* ?怨뺛걟?? static 獄쏄퀣??*/
+/* ?怨뺛걟?? absolute ??곸젫, 甕곌쑵???袁⑥삋 ?紐껋쨮 獄쏄퀣??*/
 .hl-dropdown:has(.hl-dropdown__menu--static) {
   flex-direction: column; align-items: flex-start;
 }
@@ -1140,7 +1159,7 @@ select.hl-input { cursor: pointer; padding-right: var(--hl-sp-8); }
 .hl-dropdown__item--danger { color: var(--hl-error); }
 .hl-dropdown__divider { height: 1px; background: var(--hl-border); margin: var(--hl-sp-1) 0; }
 
-/* Submenu (?섏쐞 洹몃９) */
+/* Submenu (??륁맄 域밸챶竊? */
 .hl-dropdown__sub {
   position: relative;
 }
@@ -1167,7 +1186,7 @@ select.hl-input { cursor: pointer; padding-right: var(--hl-sp-8); }
 .hl-dropdown__sub:hover > .hl-dropdown__submenu {
   opacity: 1; pointer-events: auto;
 }
-/* ?곕え?? ?꾩튂 ?좎??섎㈃????긽 ?쒖떆 */
+/* ?怨뺛걟?? ?袁⑺뒄 ?醫???롢늺????湲???뽯뻻 */
 .hl-dropdown__submenu--static {
   opacity: 1; pointer-events: auto;
 }
@@ -1218,3 +1237,138 @@ select.hl-input { cursor: pointer; padding-right: var(--hl-sp-8); }
   border-top: 1px solid var(--hl-border);
   font-size: var(--hl-text-xs); color: var(--hl-text-muted);
 }
+
+/* ==========================================================================
+   15. RESPONSIVE LAYOUT OVERRIDES
+   ========================================================================== */
+.hl-page {
+  min-height: 100vh;
+}
+
+.hl-sidebar {
+  transition: transform var(--hl-dur-slow) var(--hl-ease), box-shadow var(--hl-dur-slow) var(--hl-ease);
+}
+
+.hl-main {
+  min-width: 0;
+  width: calc(100% - var(--hl-sidebar-w));
+}
+
+.hl-header {
+  gap: var(--hl-sp-3);
+}
+
+.hl-header__lead,
+.hl-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--hl-sp-3);
+}
+
+.hl-header__lead {
+  min-width: 0;
+}
+
+.hl-header__title {
+  min-width: 0;
+}
+
+.hl-header__title .hl-brand__text {
+  white-space: nowrap;
+}
+
+.hl-nav-toggle,
+.hl-sidebar-backdrop {
+  display: none;
+}
+
+.hl-nav-toggle {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--hl-border);
+  border-radius: var(--hl-radius);
+  background: var(--hl-surface-raised);
+  color: var(--hl-text);
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  cursor: pointer;
+}
+
+.hl-nav-toggle:hover {
+  border-color: var(--hl-border-strong);
+  background: var(--hl-surface);
+}
+
+.hl-nav-toggle .material-symbols-outlined {
+  font-size: 20px;
+}
+
+@media (max-width: 960px) {
+  :root {
+    --hl-sidebar-w: min(82vw, 320px);
+  }
+
+  .hl-sidebar {
+    transform: translateX(-100%);
+    box-shadow: var(--hl-shadow-4);
+  }
+
+  .hl-sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .hl-sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    display: block;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    background: var(--hl-overlay);
+    opacity: 0;
+    pointer-events: none;
+    cursor: pointer;
+    transition: opacity var(--hl-dur-slow) var(--hl-ease);
+  }
+
+  .hl-sidebar-backdrop.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .hl-main {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .hl-header {
+    padding: 0 var(--hl-sp-4);
+  }
+
+  .hl-body {
+    padding: var(--hl-sp-4);
+  }
+
+  .hl-nav-toggle {
+    display: inline-flex;
+  }
+
+  .hl-header__title .hl-brand__text--roboto {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hl-header {
+    padding: 0 var(--hl-sp-3);
+  }
+
+  .hl-body {
+    padding: var(--hl-sp-3);
+  }
+}
+
+

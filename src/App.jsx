@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+﻿import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './Layout';
 import Home from './pages/Home';
 import Foundations from './pages/Foundations';
@@ -33,9 +33,18 @@ import AvatarPage from './pages/components/AvatarPage';
 import DropdownPage from './pages/components/DropdownPage';
 import SkeletonPage from './pages/components/SkeletonPage';
 
+function LegacyDevBaseRedirect() {
+  const location = useLocation();
+  const nextPath = location.pathname.replace(/^\/design_system/, '') || '/';
+  return <Navigate to={`${nextPath}${location.search}${location.hash}`} replace />;
+}
+
 export default function App() {
+  const useLegacyDevRedirect = import.meta.env.DEV && import.meta.env.BASE_URL === '/';
+
   return (
     <Routes>
+      {useLegacyDevRedirect && <Route path="design_system/*" element={<LegacyDevBaseRedirect />} />}
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="foundations" element={<Foundations />} />

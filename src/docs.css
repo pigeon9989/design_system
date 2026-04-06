@@ -1,6 +1,6 @@
 /* ==========================================================================
-   HL Design System — Documentation Site Styles
-   hl-system.css 위에 얹는 문서 전용 크롬 스타일.
+   HL Design System ??Documentation Site Styles
+   hl-system.css ?꾩뿉 ?밸뒗 臾몄꽌 ?꾩슜 ?щ＼ ?ㅽ???
    ========================================================================== */
 
 /* ===== Page Header ===== */
@@ -173,8 +173,15 @@
   box-shadow: var(--hl-shadow-3);
   margin-bottom: var(--hl-sp-8);
 }
-.doc-hero::after {
+html[lang='ko'] .doc-hero::after {
+  content: '구글 폰트 + 머티리얼 심볼';
+}
+
+html[lang='en'] .doc-hero::after {
   content: 'Google Fonts + Material Symbols';
+}
+
+.doc-hero::after {
   position: absolute;
   top: var(--hl-sp-5);
   right: var(--hl-sp-5);
@@ -224,8 +231,15 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 20px; margin-bottom: var(--hl-sp-3);
 }
-.doc-landing-card__title { font-size: var(--hl-text-base); font-weight: 700; letter-spacing: -0.01em; margin-bottom: 4px; }
-.doc-landing-card__desc { font-size: var(--hl-text-sm); color: var(--hl-text-secondary); line-height: 1.6; }
+.doc-landing-card__title,
+.doc-principle__title {
+  font-size: var(--hl-text-base); font-weight: 700; letter-spacing: -0.01em;
+  color: var(--hl-text); margin-bottom: 4px;
+}
+.doc-landing-card__desc,
+.doc-principle__desc {
+  font-size: var(--hl-text-sm); color: var(--hl-text-secondary); line-height: 1.6;
+}
 
 /* ===== Principle Card ===== */
 .doc-principle {
@@ -241,8 +255,6 @@
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; font-size: 18px; color: var(--hl-primary-700);
 }
-.doc-principle__title { font-size: var(--hl-text-sm); font-weight: 700; color: var(--hl-text); margin-bottom: 4px; }
-.doc-principle__desc { font-size: var(--hl-text-xs); color: var(--hl-text-secondary); line-height: 1.6; }
 
 /* Principles carousel (Overview) */
 .doc-principles-toolbar {
@@ -260,8 +272,11 @@
 }
 .doc-principles-track {
   display: flex; gap: var(--hl-sp-3);
+  align-items: stretch;
   overflow-x: auto;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--hl-sp-1);
+  scroll-padding-right: var(--hl-sp-1);
   padding-bottom: var(--hl-sp-2);
   margin: 0 calc(-1 * var(--hl-sp-1));
   padding-left: var(--hl-sp-1); padding-right: var(--hl-sp-1);
@@ -270,7 +285,8 @@
 }
 .doc-principles-track:focus-visible { outline: none; }
 .doc-principle--interactive {
-  flex: 0 0 min(100%, 300px);
+  flex: 0 0 calc((100% - (var(--hl-sp-3) * 3)) / 4);
+  min-width: 0;
   scroll-snap-align: start;
   cursor: pointer;
   text-align: left;
@@ -291,7 +307,7 @@
 }
 .doc-principle__body { min-width: 0; flex: 1; }
 .doc-principle__cta {
-  margin-top: var(--hl-sp-2);
+  margin-top: var(--hl-sp-1);
   font-size: var(--hl-text-xs); font-weight: 600;
   color: var(--hl-primary-600);
 }
@@ -354,3 +370,332 @@
   cursor: pointer; display: inline-flex; align-items: center; gap: var(--hl-sp-1);
 }
 .doc-theme-btn:hover { border-color: var(--hl-border-strong); color: var(--hl-text); }
+
+.doc-theme-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 960px) {
+  .doc-page-desc,
+  .doc-hero__desc {
+    max-width: none;
+  }
+
+  .doc-hero {
+    padding: var(--hl-sp-8) var(--hl-sp-5) var(--hl-sp-7, 28px);
+  }
+
+  .doc-guideline-row {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-typo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--hl-sp-2);
+  }
+
+  .doc-typo__meta,
+  .doc-spacing__label {
+    width: auto;
+  }
+
+  .doc-spacing {
+    flex-wrap: wrap;
+  }
+
+  .doc-layout-row {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .doc-layout-row span {
+    width: 100%;
+    margin-left: 22px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .doc-principle--interactive {
+    flex-basis: calc((100% - (var(--hl-sp-3) * 2)) / 3);
+  }
+}
+
+@media (max-width: 900px) {
+  .doc-principle--interactive {
+    flex-basis: calc((100% - var(--hl-sp-3)) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .doc-section {
+    margin-bottom: var(--hl-sp-8);
+  }
+
+  .doc-demo {
+    overflow-x: auto;
+  }
+
+  .doc-demo__preview {
+    padding: var(--hl-sp-4);
+  }
+
+  .doc-hero {
+    padding: var(--hl-sp-6) var(--hl-sp-4) 72px;
+  }
+
+  .doc-hero::after {
+    top: auto;
+    right: auto;
+    left: var(--hl-sp-4);
+    bottom: var(--hl-sp-4);
+    max-width: calc(100% - 32px);
+    font-size: 10px;
+  }
+
+  .doc-hero__title {
+    font-size: var(--hl-text-2xl);
+  }
+
+  .doc-principles-toolbar {
+    align-items: stretch;
+  }
+
+  .doc-principles-nav {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .doc-principle--interactive {
+    flex-basis: min(86vw, 280px);
+  }
+
+  .doc-token-table {
+    min-width: 560px;
+  }
+
+  .doc-theme-btn {
+    padding: 0 var(--hl-sp-2);
+  }
+
+  .doc-theme-btn__label {
+    display: none;
+  }
+}
+
+/* Principles list (Overview) */
+.doc-principles-list {
+  display: grid;
+  gap: var(--hl-sp-3);
+}
+
+.doc-principle--list {
+  display: grid;
+  grid-template-columns: 24px 32px minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--hl-sp-2);
+  row-gap: var(--hl-sp-2);
+  padding: var(--hl-sp-3) var(--hl-sp-4);
+}
+
+.doc-principle__head {
+  display: grid;
+  grid-template-columns: 28px 32px minmax(0, 1fr);
+  align-items: center;
+  gap: var(--hl-sp-3);
+}
+
+.doc-principle__body {
+  padding-left: 0; /* index/icon 그리드가 이미 좌측 공간을 제공 */
+  grid-column: 3 / -1;
+}
+
+.doc-principle__title {
+  font-size: var(--hl-text-sm);
+  font-weight: 700;
+  color: var(--hl-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-principle__desc {
+  margin: 0;
+  font-size: var(--hl-text-xs);
+  line-height: 1.4;
+  color: var(--hl-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-principle__line {
+  display: flex;
+  align-items: baseline;
+  gap: var(--hl-sp-2);
+  min-width: 0;
+}
+
+.doc-principle__desc {
+  flex: 1;
+  min-width: 0;
+}
+
+.doc-principle__cta {
+  margin-top: 0;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-size: var(--hl-text-xs);
+  font-weight: 700;
+  color: var(--hl-primary-600);
+  letter-spacing: 0.01em;
+}
+
+[data-theme="dark"] .doc-principle__cta { color: var(--hl-primary-400); }
+
+.doc-principle__detail {
+  grid-column: 3 / -1;
+  grid-row: 2;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: max-height var(--hl-dur-slow) var(--hl-ease),
+              opacity var(--hl-dur) var(--hl-ease),
+              transform var(--hl-dur) var(--hl-ease);
+}
+
+button.doc-principle.is-expanded .doc-principle__detail,
+button.doc-principle--list.is-expanded .doc-principle__detail {
+  max-height: 280px;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.doc-principle.is-expanded .doc-principle__detail .doc-principle__notes,
+button.doc-principle--list.is-expanded .doc-principle__detail .doc-principle__notes {
+  margin-top: var(--hl-sp-2);
+}
+
+.doc-principle__notes {
+  display: grid;
+  gap: var(--hl-sp-1);
+  margin-top: var(--hl-sp-2);
+}
+
+.doc-principle__note {
+  position: relative;
+  margin: 0;
+  padding-left: 14px;
+  font-size: var(--hl-text-sm);
+  line-height: 1.75;
+  color: var(--hl-text-secondary);
+}
+
+.doc-principle__note::before {
+  content: '';
+  position: absolute;
+  top: 0.78em;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--hl-primary-500);
+}
+
+.doc-principle__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--hl-surface-raised);
+  font-family: var(--hl-mono);
+  font-size: var(--hl-text-xs);
+  font-weight: 700;
+  color: var(--hl-text-muted);
+}
+
+/* list(Overview)에서 아이콘/넘버가 너무 커 카드가 비대해지는 것을 방지 */
+.doc-principle--list .doc-principle__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  .doc-principles-list {
+    gap: var(--hl-sp-3);
+  }
+
+  .doc-principle--list {
+    grid-template-columns: 24px 28px minmax(0, 1fr);
+    column-gap: var(--hl-sp-2);
+    padding: var(--hl-sp-3) var(--hl-sp-3);
+  }
+
+  .doc-principle__head {
+    grid-template-columns: 24px 28px minmax(0, 1fr);
+    gap: var(--hl-sp-2);
+  }
+
+  .doc-principle__body {
+    padding-left: 0;
+  }
+
+  .doc-principle__index {
+    width: 24px;
+    height: 24px;
+  }
+
+  .doc-principle--list .doc-principle__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
+.doc-mode-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border: 1px solid var(--hl-border);
+  border-radius: var(--hl-radius-full);
+  background: var(--hl-surface-raised);
+}
+
+.doc-mode-switch__btn {
+  min-width: 40px;
+  height: 24px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--hl-radius-full);
+  background: transparent;
+  color: var(--hl-text-secondary);
+  font-family: var(--hl-font);
+  font-size: var(--hl-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.doc-mode-switch__btn.is-active {
+  background: var(--hl-surface);
+  color: var(--hl-text);
+  box-shadow: var(--hl-shadow-1);
+}
+
+@media (max-width: 640px) {
+  .doc-mode-switch__btn {
+    min-width: 36px;
+    padding: 0 8px;
+  }
+}
+
+
+
+
